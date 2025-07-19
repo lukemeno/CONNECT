@@ -65,12 +65,16 @@ extension FriendRequest {
         status = .accepted
         respondedAt = Date()
         
-        // Add each user to the other's friends list
+        // Add each user to the other's friends list (check for duplicates)
         if let sender = sender, let receiver = receiver {
-            sender.friends.append(receiver)
-            receiver.friends.append(sender)
-            sender.followingCount += 1
-            receiver.followersCount += 1
+            if !sender.friends.contains(where: { $0.id == receiver.id }) {
+                sender.friends.append(receiver)
+                sender.followingCount += 1
+            }
+            if !receiver.friends.contains(where: { $0.id == sender.id }) {
+                receiver.friends.append(sender)
+                receiver.followersCount += 1
+            }
         }
     }
     
@@ -83,4 +87,4 @@ extension FriendRequest {
         status = .blocked
         respondedAt = Date()
     }
-} 
+}  

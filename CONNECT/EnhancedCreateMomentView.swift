@@ -131,9 +131,14 @@ struct EnhancedCreateMomentView: View {
         var images: [UIImage] = []
         
         for item in items {
-            if let data = try? await item.loadTransferable(type: Data.self),
-               let image = UIImage(data: data) {
-                images.append(image)
+            do {
+                if let data = try await item.loadTransferable(type: Data.self),
+                   let image = UIImage(data: data) {
+                    images.append(image)
+                }
+            } catch {
+                print("Failed to process image: \(error)")
+                continue
             }
         }
         
@@ -237,8 +242,10 @@ struct MediaSection: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 8))
                                 
                                 Button {
-                                    processedImages.remove(at: index)
-                                    selectedImages.remove(at: index)
+                                    if index < processedImages.count && index < selectedImages.count {
+                                        processedImages.remove(at: index)
+                                        selectedImages.remove(at: index)
+                                    }
                                 } label: {
                                     Image(systemName: "xmark.circle.fill")
                                         .foregroundColor(.white)
@@ -505,4 +512,4 @@ struct PrivacyButton: View {
     EnhancedCreateMomentView()
         .environmentObject(DependencyContainer().authenticationManager)
         .environmentObject(DependencyContainer())
-} 
+}       

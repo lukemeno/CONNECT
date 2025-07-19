@@ -28,7 +28,7 @@ class FeedAlgorithmService: ObservableObject {
             
             // Friends' moments
             let friendsDescriptor = FetchDescriptor<Moment>(
-                predicate: #Predicate { moment in
+                predicate: #Predicate<Moment> { moment in
                     moment.privacy == MomentPrivacy.friends || moment.privacy == MomentPrivacy.publicMoment
                 },
                 sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
@@ -127,7 +127,7 @@ class FeedAlgorithmService: ObservableObject {
         do {
             // Get trending public moments
             let descriptor = FetchDescriptor<Moment>(
-                predicate: #Predicate { moment in
+                predicate: #Predicate<Moment> { moment in
                     moment.privacy == MomentPrivacy.publicMoment
                 },
                 sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
@@ -189,4 +189,4 @@ class FeedAlgorithmService: ObservableObject {
             .sorted { $0.score > $1.score }
             .map { $0.moment }
     }
-} 
+}  

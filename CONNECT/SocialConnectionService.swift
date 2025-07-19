@@ -30,7 +30,7 @@ class SocialConnectionService: ObservableObject {
         
         // Check if request already exists
         let descriptor = FetchDescriptor<FriendRequest>(
-            predicate: #Predicate { request in
+            predicate: #Predicate<FriendRequest> { request in
                 request.sender?.id == sender.id && request.receiver?.id == receiver.id
             }
         )
@@ -151,7 +151,7 @@ class SocialConnectionService: ObservableObject {
     
     func hasPendingRequest(from sender: User, to receiver: User, modelContext: ModelContext) -> Bool {
         let descriptor = FetchDescriptor<FriendRequest>(
-            predicate: #Predicate { request in
+            predicate: #Predicate<FriendRequest> { request in
                 request.sender?.id == sender.id && 
                 request.receiver?.id == receiver.id && 
                 request.status == FriendRequestStatus.pending
@@ -165,4 +165,4 @@ class SocialConnectionService: ObservableObject {
             return false
         }
     }
-} 
+}  

@@ -67,9 +67,13 @@ extension Comment {
     var depth: Int {
         var count = 0
         var current = parentComment
-        while current != nil {
+        var visited = Set<UUID>()
+        
+        while let currentComment = current, count < 10 {
+            if visited.contains(currentComment.id) { break }
+            visited.insert(currentComment.id)
             count += 1
-            current = current?.parentComment
+            current = currentComment.parentComment
         }
         return count
     }
@@ -91,4 +95,4 @@ extension Comment {
         repliesCount = max(0, repliesCount - 1)
         parentComment?.decrementReplies()
     }
-} 
+}  
