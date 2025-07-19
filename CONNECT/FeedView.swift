@@ -94,14 +94,21 @@ struct FeedView: View {
         
         isLoading = true
         
-        let feedMoments = await container.feedAlgorithmService.generatePersonalizedFeed(
-            for: currentUser,
-            modelContext: modelContext
-        )
-        
-        await MainActor.run {
-            self.moments = feedMoments
-            self.isLoading = false
+        do {
+            let feedMoments = await container.feedAlgorithmService.generatePersonalizedFeed(
+                for: currentUser,
+                modelContext: modelContext
+            )
+            
+            await MainActor.run {
+                self.moments = feedMoments
+                self.isLoading = false
+            }
+        } catch {
+            await MainActor.run {
+                self.isLoading = false
+                print("Failed to load feed: \(error)")
+            }
         }
     }
 }
@@ -167,4 +174,4 @@ struct EmptyFeedView: View {
     FeedView()
         .environmentObject(DependencyContainer().authenticationManager)
         .environmentObject(DependencyContainer())
-} 
+}     

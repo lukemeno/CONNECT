@@ -57,7 +57,7 @@ class UserDiscoveryService: ObservableObject {
         do {
             // Get all users except current user and existing friends
             let descriptor = FetchDescriptor<User>(
-                predicate: #Predicate { user in
+                predicate: #Predicate<User> { user in
                     user.id != currentUser.id && user.allowDiscovery
                 }
             )
@@ -200,7 +200,7 @@ class UserDiscoveryService: ObservableObject {
             let lowercaseQuery = query.lowercased()
             
             let descriptor = FetchDescriptor<User>(
-                predicate: #Predicate { user in
+                predicate: #Predicate<User> { user in
                     user.id != currentUser.id && user.allowDiscovery
                 }
             )
@@ -221,4 +221,4 @@ class UserDiscoveryService: ObservableObject {
             return []
         }
     }
-} 
+}    

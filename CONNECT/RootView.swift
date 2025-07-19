@@ -165,4 +165,4 @@ struct WelcomeView: View {
 #Preview {
     RootView()
         .environmentObject(DependencyContainer().authenticationManager)
-} 
+}   
