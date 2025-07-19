@@ -55,7 +55,7 @@ struct ContentView: View {
                     Text("Notifications")
                 }
                 .tag(3)
-                .badge(container.notificationService.unreadNotificationsCount > 0 ? container.notificationService.unreadNotificationsCount : 0)
+                .badge(container.notificationService.unreadNotificationsCount > 0 ? container.notificationService.unreadNotificationsCount : nil)
             
             // Profile Tab
             ProfileView()

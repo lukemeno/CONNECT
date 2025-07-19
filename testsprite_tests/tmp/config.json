@@ -4,5 +4,14 @@
   "scope": "codebase",
   "localEndpoint": "http://localhost:5173",
   "loginUser": "Luke",
-  "loginPassword": "Luke1108"
+  "loginPassword": "Luke1108",
+  "executionArgs": {
+    "projectName": "CONNECT",
+    "projectPath": "/Users/alexandergorny/AI-Apps/CONNECT",
+    "testIds": [],
+    "additionalInstruction": "",
+    "envs": {
+      "API_KEY": "sk-user-qdSbl7pvEIlluW3x2y0ECnpp96twE6wrIpBNHgAfbNgKA6vKRz8-WnoYj2Rz1T-PhTYcd8cwx6TipT9zP1tI9F2t_hSkzVOakTCuLjB6WDdr4DJaG15BT5t1Q2C9nd5TN28"
+    }
+  }
 }

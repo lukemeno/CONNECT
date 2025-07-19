@@ -1,0 +1,509 @@
+[
+  {
+    "id": "TC001",
+    "title": "User Profile Creation with GDPR Consent",
+    "description": "Verify the user can create a profile by entering a name, taking a selfie, optionally entering an Instagram handle, accepting GDPR consent, and saving the profile successfully.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Launch the app and navigate to the onboarding/profile creation screen."
+      },
+      {
+        "type": "action",
+        "description": "Input a valid name."
+      },
+      {
+        "type": "action",
+        "description": "Take a selfie using the front camera."
+      },
+      {
+        "type": "action",
+        "description": "Optionally enter a valid Instagram handle."
+      },
+      {
+        "type": "action",
+        "description": "Read and accept the GDPR consent checkbox."
+      },
+      {
+        "type": "action",
+        "description": "Submit and save the profile."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the profile is created successfully and stored."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify GDPR consent is recorded and user data is handled securely."
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Event Check-In via QR Code and Geo-Fencing Positive Flow",
+    "description": "Verify that scanning a valid event QR code combined with location verification within geo-fence allows successful event check-in.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the check-in screen with camera to scan QR code."
+      },
+      {
+        "type": "action",
+        "description": "Scan a valid event QR code."
+      },
+      {
+        "type": "action",
+        "description": "Grant location permission when requested."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify GPS coordinates are obtained and verified to be inside the event geo-fence radius."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify check-in confirmation is displayed."
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Event Check-In Failure due to Outside Geo-Fence",
+    "description": "Verify that scanning a valid event QR code while location is outside geo-fence radius results in check-in denial and appropriate error message.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the check-in screen with camera to scan QR code."
+      },
+      {
+        "type": "action",
+        "description": "Scan a valid event QR code."
+      },
+      {
+        "type": "action",
+        "description": "Grant location permission."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify GPS location is outside the allowed geo-fence."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an error message indicating location invalid for event check-in is displayed."
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Event Check-In Failure due to Invalid QR Code",
+    "description": "Verify that scanning an invalid or unrecognized QR code shows an appropriate error and does not proceed to check-in.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open check-in with camera."
+      },
+      {
+        "type": "action",
+        "description": "Scan an invalid or corrupted QR code."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the system rejects the QR code and displays an invalid QR code error."
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure no check-in attempt is made."
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Event Check-In Failure due to Location Permission Denied",
+    "description": "Verify that denying location permissions prevents event check-in with an appropriate user message.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open check-in screen."
+      },
+      {
+        "type": "action",
+        "description": "Scan a valid QR code."
+      },
+      {
+        "type": "action",
+        "description": "Deny location permission when prompted."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that check-in is blocked and a message requesting location permission is displayed."
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Guest List Display After Check-In",
+    "description": "Verify the guest list loads correctly showing profiles of other checked-in users excluding self, with vertical scrolling and randomized order.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Complete successful check-in to an event."
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the event guest list screen."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify guest list is shown with other attendees' profiles excluding current user."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the list supports vertical scrolling."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the order of profiles is randomized on each load."
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Swipe Right to Like Profile Updates Backend",
+    "description": "Verify swiping a profile right records a 'like' on backend with real-time synchronization.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to event guest list."
+      },
+      {
+        "type": "action",
+        "description": "Swipe right on a profile card."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI updates to show profile liked."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify backend receives and records like event in real-time."
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Swipe Left to Dismiss Profile Updates Backend",
+    "description": "Verify swiping a profile left records a dismissal on backend with real-time synchronization.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open guest list of checked-in users."
+      },
+      {
+        "type": "action",
+        "description": "Swipe left on a profile card."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI updates to dismiss profile."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify backend updates with dismissed event in real-time."
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Tap Profile Opens Instagram Page If Handle Present",
+    "description": "Verify tapping on a profile with an Instagram handle opens the corresponding Instagram page successfully.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to guest list with users having Instagram handles."
+      },
+      {
+        "type": "action",
+        "description": "Tap on a profile card containing an Instagram handle."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify app opens Instagram page corresponding to that handle."
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Tap Profile Without Instagram Handle Shows Notification",
+    "description": "Verify tapping on a profile without an Instagram handle displays an appropriate fallback notification.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to guest list showing profiles without Instagram handles."
+      },
+      {
+        "type": "action",
+        "description": "Tap on a profile without Instagram handle."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a notification or alert informs user Instagram is not available for this profile."
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Synchronized Countdown Trigger and Display",
+    "description": "Verify that at the backend-triggered time, all checked-in users receive a synchronized countdown displayed consistently through real-time communication.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Ensure multiple users are checked-in to the event."
+      },
+      {
+        "type": "action",
+        "description": "Trigger countdown from backend and send to all clients via WebSocket or real-time mechanism."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify countdown timer appears on all devices simultaneously."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify countdown display is consistent and synchronized in real-time."
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Push Notification Sent When Countdown Triggers In Background",
+    "description": "Verify that users running app in background receive a push notification prompting countdown participation.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Minimize app or switch to background."
+      },
+      {
+        "type": "action",
+        "description": "Trigger countdown from backend."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify push notification is received on device."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify tapping notification brings user into app and countdown."
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Simultaneous Front and Rear Camera Capture at Countdown End",
+    "description": "Verify that at countdown completion, both front and rear cameras capture photos simultaneously, display confirmation UI, and reliably upload images.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Complete countdown to zero."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify front and rear cameras trigger and capture photos simultaneously."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify confirmation screen displays captured photos."
+      },
+      {
+        "type": "action",
+        "description": "Initiate upload of both images."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify successful upload of both photos to backend with proper error handling."
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Backend Generates Photo Collage After Event",
+    "description": "Verify that the backend creates a dynamic photo collage combining participant images within the specified timeframe and that users receive notification and can view, save, and share the collage in the app.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Upload participant photos after event moment."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify backend processes photos and generates a collage within expected timeframe."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify users receive notification about collage availability."
+      },
+      {
+        "type": "action",
+        "description": "Open collage from notification."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify collage is viewable, savable, and shareable within the app."
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "App UI Accessibility Compliance with WCAG 2.1 Level AA",
+    "description": "Verify that all app UI components and workflows meet WCAG 2.1 Level AA accessibility standards including contrast, scalable text, voice-over compatibility, and keyboard navigation.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate through main app screens including onboarding, check-in, guest list, and moment."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify text contrast meets minimum AA requirements."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify all interactive elements are reachable and operable using voice-over."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify app supports dynamic text scaling."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify keyboard navigation and focus indicators present for key UI elements."
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Dark Mode Themed UI Verification",
+    "description": "Verify the app UI properly switches to dark mode with modern, vibrant accent colors well suited for bars, clubs, and concert atmosphere.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Enable dark mode on iOS device."
+      },
+      {
+        "type": "action",
+        "description": "Launch the app and navigate through key screens."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI colors adapt to dark theme correctly."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify accent colors are vibrant and consistent with brand theme."
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "App Handles Peak Load During Event Check-In",
+    "description": "Verify the system remains responsive and handles peak concurrent check-in loads with minimal latency and error rate.",
+    "category": "performance",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Simulate large number of users scanning valid QR codes and checking in simultaneously."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify serverless backend scales appropriately and check-in responses are timely."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify no data loss or check-in failures under peak load."
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "User Data GDPR Compliance Verification",
+    "description": "Verify explicit user consent is obtained, data minimization is enforced, and secure data handling is applied throughout the app in compliance with GDPR.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "During onboarding provide GDPR consent information."
+      },
+      {
+        "type": "action",
+        "description": "Attempt to proceed without consent."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user cannot proceed without accepting GDPR consent."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify personal data stored is minimal and purpose-limited."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify data transmission is encrypted and securely handled."
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Error Handling for Network Disruptions During Upload",
+    "description": "Verify that network failures during photo upload or backend updates result in user notification and retry mechanisms without data loss.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Simulate network disconnection during photo upload after countdown."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user is notified of upload failure."
+      },
+      {
+        "type": "action",
+        "description": "Restore network and attempt automatic retry."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify photo is uploaded successfully after retry."
+      }
+    ]
+  }
+]
