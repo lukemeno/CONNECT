@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import UserNotifications
 
-@MainActor
 class NotificationService: ObservableObject {
     @Published var hasPermission = false
     @Published var notifications: [ConnectNotification] = []
@@ -51,8 +50,9 @@ class NotificationService: ObservableObject {
             type: .friendRequest,
             title: "New Friend Request",
             message: "\(sender.displayName) sent you a friend request",
-            fromUser: sender,
-            toUser: receiver,
+            fromUserId: sender.id,
+            toUserId: receiver.id,
+            momentId: nil,
             createdAt: Date()
         )
         
@@ -68,8 +68,9 @@ class NotificationService: ObservableObject {
             type: .friendRequestAccepted,
             title: "Friend Request Accepted",
             message: "\(receiver.displayName) accepted your friend request",
-            fromUser: receiver,
-            toUser: sender,
+            fromUserId: receiver.id,
+            toUserId: sender.id,
+            momentId: nil,
             createdAt: Date()
         )
         
@@ -86,8 +87,8 @@ class NotificationService: ObservableObject {
             type: .momentLiked,
             title: "New Like",
             message: "\(user.displayName) liked your moment",
-            fromUser: user,
-            toUser: author,
+            fromUserId: user.id,
+            toUserId: author.id,
             momentId: moment.id,
             createdAt: Date()
         )
@@ -104,8 +105,8 @@ class NotificationService: ObservableObject {
             type: .momentCommented,
             title: "New Comment",
             message: "\(user.displayName) commented on your moment",
-            fromUser: user,
-            toUser: author,
+            fromUserId: user.id,
+            toUserId: author.id,
             momentId: moment.id,
             createdAt: Date()
         )
@@ -170,13 +171,13 @@ class NotificationService: ObservableObject {
 }
 
 // MARK: - ConnectNotification Model
-struct ConnectNotification: Identifiable, Codable {
+struct ConnectNotification: Identifiable {
     let id: UUID
     let type: NotificationType
     let title: String
     let message: String
-    let fromUser: User?
-    let toUser: User
+    let fromUserId: UUID?
+    let toUserId: UUID
     let momentId: UUID?
     let createdAt: Date
     var isRead: Bool = false

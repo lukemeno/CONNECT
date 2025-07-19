@@ -9,8 +9,8 @@ import Foundation
 import SwiftData
 
 enum CommunityType: String, CaseIterable, Codable {
-    case public = "public"
-    case private = "private"
+    case `public` = "public"
+    case `private` = "private"
     case secret = "secret"
     
     var displayName: String {
@@ -34,7 +34,7 @@ enum CommunityType: String, CaseIterable, Codable {
 final class Community {
     @Attribute(.unique) var id: UUID
     var name: String
-    var description: String
+    var communityDescription: String
     var imageURL: String?
     var type: CommunityType
     var createdAt: Date
@@ -67,7 +67,7 @@ final class Community {
     ) {
         self.id = UUID()
         self.name = name
-        self.description = description
+        self.communityDescription = description
         self.creator = creator
         self.type = type
         self.imageURL = imageURL

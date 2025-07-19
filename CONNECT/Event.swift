@@ -49,7 +49,7 @@ enum EventType: String, CaseIterable, Codable {
 final class Event {
     @Attribute(.unique) var id: UUID
     var title: String
-    var description: String
+    var eventDescription: String
     var type: EventType
     var startDate: Date
     var endDate: Date
@@ -91,7 +91,7 @@ final class Event {
     ) {
         self.id = UUID()
         self.title = title
-        self.description = description
+        self.eventDescription = description
         self.type = type
         self.startDate = startDate
         self.endDate = endDate

@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import SwiftData
 
-@MainActor
 class FeedAlgorithmService: ObservableObject {
     @Published var isLoading = false
     @Published var feedError: String?
@@ -29,7 +28,7 @@ class FeedAlgorithmService: ObservableObject {
             // Friends' moments
             let friendsDescriptor = FetchDescriptor<Moment>(
                 predicate: #Predicate { moment in
-                    moment.privacy == MomentPrivacy.friends || moment.privacy == MomentPrivacy.publicMoment
+                    moment.privacy.rawValue == "friends" || moment.privacy.rawValue == "public"
                 },
                 sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
             )
@@ -128,7 +127,7 @@ class FeedAlgorithmService: ObservableObject {
             // Get trending public moments
             let descriptor = FetchDescriptor<Moment>(
                 predicate: #Predicate { moment in
-                    moment.privacy == MomentPrivacy.publicMoment
+                    moment.privacy.rawValue == "public"
                 },
                 sortBy: [SortDescriptor(\.createdAt, order: .reverse)]
             )

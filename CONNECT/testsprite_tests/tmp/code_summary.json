@@ -1,0 +1,123 @@
+{
+  "tech_stack": [
+    "Swift",
+    "SwiftUI",
+    "SwiftData",
+    "CloudKit",
+    "LocalAuthentication",
+    "UserNotifications"
+  ],
+  "features": [
+    {
+      "name": "User Model",
+      "description": "Defines the user entity, including profile, privacy, and GDPR fields.",
+      "files": ["CONNECT/User.swift"]
+    },
+    {
+      "name": "Moment Model",
+      "description": "Defines moments (posts) with media, privacy, and relationships.",
+      "files": ["CONNECT/Moment.swift"]
+    },
+    {
+      "name": "Comment Model",
+      "description": "Defines comments and nested replies for moments.",
+      "files": ["CONNECT/Comment.swift"]
+    },
+    {
+      "name": "Reaction Model",
+      "description": "Defines reactions to moments and comments.",
+      "files": ["CONNECT/Reaction.swift"]
+    },
+    {
+      "name": "FriendRequest Model",
+      "description": "Handles friend request logic and status.",
+      "files": ["CONNECT/FriendRequest.swift"]
+    },
+    {
+      "name": "Community Model",
+      "description": "Defines communities, their types, and members.",
+      "files": ["CONNECT/Community.swift"]
+    },
+    {
+      "name": "Event Model",
+      "description": "Defines events, attendees, and related community.",
+      "files": ["CONNECT/Event.swift"]
+    },
+    {
+      "name": "Location Model",
+      "description": "Defines locations for moments and events.",
+      "files": ["CONNECT/Location.swift"]
+    },
+    {
+      "name": "AuthenticationManager",
+      "description": "Handles user authentication, onboarding, and biometric login.",
+      "files": ["CONNECT/AuthenticationManager.swift"]
+    },
+    {
+      "name": "DependencyContainer",
+      "description": "Dependency injection for all services and managers.",
+      "files": ["CONNECT/DependencyContainer.swift"]
+    },
+    {
+      "name": "AnalyticsManager",
+      "description": "Tracks analytics events and user actions.",
+      "files": ["CONNECT/AnalyticsManager.swift"]
+    },
+    {
+      "name": "MediaProcessingService",
+      "description": "Handles media processing for images and videos.",
+      "files": ["CONNECT/MediaProcessingService.swift"]
+    },
+    {
+      "name": "UserDiscoveryService",
+      "description": "Implements user discovery and search logic.",
+      "files": ["CONNECT/UserDiscoveryService.swift"]
+    },
+    {
+      "name": "FeedAlgorithmService",
+      "description": "Personalizes and sorts the feed for each user.",
+      "files": ["CONNECT/FeedAlgorithmService.swift"]
+    },
+    {
+      "name": "SocialConnectionService",
+      "description": "Manages friend requests and social connections.",
+      "files": ["CONNECT/SocialConnectionService.swift"]
+    },
+    {
+      "name": "MomentCreationService",
+      "description": "Handles creation of new moments with media and privacy.",
+      "files": ["CONNECT/MomentCreationService.swift"]
+    },
+    {
+      "name": "NotificationService",
+      "description": "Handles push notifications and in-app notifications.",
+      "files": ["CONNECT/NotificationService.swift"]
+    },
+    {
+      "name": "Views",
+      "description": "All SwiftUI views for onboarding, feed, discovery, profile, notifications, comments, and moment creation.",
+      "files": [
+        "CONNECT/ContentView.swift",
+        "CONNECT/RootView.swift",
+        "CONNECT/OnboardingView.swift",
+        "CONNECT/FeedView.swift",
+        "CONNECT/MomentCardView.swift",
+        "CONNECT/EnhancedCreateMomentView.swift",
+        "CONNECT/UserDiscoveryView.swift",
+        "CONNECT/ProfileView.swift",
+        "CONNECT/NotificationsView.swift",
+        "CONNECT/CommentsView.swift"
+      ]
+    },
+    {
+      "name": "Camera Integration",
+      "description": "Custom camera view for capturing media.",
+      "files": ["CONNECT/CameraView.swift"]
+    },
+    {
+      "name": "Error Handling",
+      "description": "Centralized error types for the app.",
+      "files": ["CONNECT/ConnectError.swift"]
+    }
+  ]
+} 

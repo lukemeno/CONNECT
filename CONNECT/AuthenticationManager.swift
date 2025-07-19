@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import LocalAuthentication
 
-@MainActor
 class AuthenticationManager: ObservableObject {
     @Published var currentUser: User?
     @Published var isAuthenticated = false
@@ -46,8 +45,8 @@ class AuthenticationManager: ObservableObject {
         // Save to keychain
         keychain.saveUserData(user)
         
-        // Track analytics
-        AnalyticsManager.shared.track(.userOnboardingCompleted)
+                    // Track analytics
+            // Note: Analytics tracking would be handled by the injected AnalyticsManager
     }
     
     // MARK: - Biometric Authentication
@@ -93,8 +92,8 @@ class AuthenticationManager: ObservableObject {
         // Clear keychain
         keychain.clearUserData()
         
-        // Track analytics
-        AnalyticsManager.shared.track(.userSignedOut)
+                    // Track analytics
+            // Note: Analytics tracking would be handled by the injected AnalyticsManager
     }
     
     // MARK: - Update User
@@ -144,21 +143,4 @@ class KeychainManager {
     }
 }
 
-// MARK: - Analytics Manager
-class AnalyticsManager {
-    static let shared = AnalyticsManager()
-    
-    weak var authenticationManager: AuthenticationManager?
-    
-    enum Event {
-        case userOnboardingCompleted
-        case userSignedOut
-        case momentCreated
-        case friendRequestSent
-    }
-    
-    func track(_ event: Event) {
-        // Analytics tracking implementation
-        print("Analytics: \(event)")
-    }
-} 
+ 

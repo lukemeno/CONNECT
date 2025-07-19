@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 // MARK: - Analytics Manager
-@MainActor
 class AnalyticsManager: ObservableObject {
     weak var authenticationManager: AuthenticationManager?
     

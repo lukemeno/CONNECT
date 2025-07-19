@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-@MainActor
 class DependencyContainer: ObservableObject {
     
     // MARK: - Core Services

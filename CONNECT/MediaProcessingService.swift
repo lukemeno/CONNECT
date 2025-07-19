@@ -10,7 +10,6 @@ import SwiftUI
 import Photos
 import AVFoundation
 
-@MainActor
 class MediaProcessingService: ObservableObject {
     
     // MARK: - Properties

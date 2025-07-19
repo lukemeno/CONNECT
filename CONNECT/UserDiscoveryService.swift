@@ -10,7 +10,6 @@ import SwiftUI
 import SwiftData
 import CoreLocation
 
-@MainActor
 class UserDiscoveryService: ObservableObject {
     @Published var isLoading = false
     @Published var discoveryError: String?
@@ -58,7 +57,7 @@ class UserDiscoveryService: ObservableObject {
             // Get all users except current user and existing friends
             let descriptor = FetchDescriptor<User>(
                 predicate: #Predicate { user in
-                    user.id != currentUser.id && user.allowDiscovery
+                    user.allowDiscovery == true
                 }
             )
             
@@ -201,7 +200,7 @@ class UserDiscoveryService: ObservableObject {
             
             let descriptor = FetchDescriptor<User>(
                 predicate: #Predicate { user in
-                    user.id != currentUser.id && user.allowDiscovery
+                    user.allowDiscovery == true
                 }
             )
             

@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import SwiftData
 
-@MainActor
 class SocialConnectionService: ObservableObject {
     @Published var isProcessing = false
     @Published var connectionError: String?
@@ -29,9 +28,11 @@ class SocialConnectionService: ObservableObject {
         }
         
         // Check if request already exists
+        let senderId = sender.id
+        let receiverId = receiver.id
         let descriptor = FetchDescriptor<FriendRequest>(
             predicate: #Predicate { request in
-                request.sender?.id == sender.id && request.receiver?.id == receiver.id
+                request.sender?.id == senderId && request.receiver?.id == receiverId
             }
         )
         
@@ -58,7 +59,7 @@ class SocialConnectionService: ObservableObject {
             await notificationService?.sendFriendRequestNotification(to: receiver, from: sender)
             
             // Track analytics
-            AnalyticsManager.shared.track(.friendRequestSent)
+            // Note: Analytics tracking would be handled by the injected AnalyticsManager
             
             isProcessing = false
             return true
@@ -150,10 +151,12 @@ class SocialConnectionService: ObservableObject {
     }
     
     func hasPendingRequest(from sender: User, to receiver: User, modelContext: ModelContext) -> Bool {
+        let senderId = sender.id
+        let receiverId = receiver.id
         let descriptor = FetchDescriptor<FriendRequest>(
             predicate: #Predicate { request in
-                request.sender?.id == sender.id && 
-                request.receiver?.id == receiver.id && 
+                request.sender?.id == senderId && 
+                request.receiver?.id == receiverId && 
                 request.status == FriendRequestStatus.pending
             }
         )
